@@ -1,6 +1,7 @@
 package com.example.rich_client_server;
 
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +32,7 @@ public class TodoController {
     }
 
     @PostMapping
-    public Todo save(@RequestBody Todo todo) {
+    public Todo save(@RequestBody @Valid Todo todo) {
         return todoRepository.save(todo);
     }
 }

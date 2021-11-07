@@ -4,14 +4,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Todo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
+
+    @Size(message = "title must not be longer than 20 characters", max = 20)
+    @NotBlank(message = "title must not be blank")
     private String title;
+
     private boolean done;
 
     public Todo(String title, boolean done) {
@@ -25,10 +31,6 @@ public class Todo {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -45,5 +47,10 @@ public class Todo {
 
     public void setDone(boolean done) {
         this.done = done;
+    }
+
+    @Override
+    public String toString() {
+        return "Todo(id=" + id + ", title='" + title + '\'' + ", done=" + done + ')';
     }
 }
